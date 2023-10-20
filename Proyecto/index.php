@@ -30,12 +30,12 @@ require_once "idioma.php";
             ?>
         </div>
         <div class="right">
-                <img id="juanra" src="/imgs/juanra.webp" alt="" srcset="">
+                <img id="juanra" src="imgs/juanra.webp" alt="" srcset="">
             <div class="play">
             <?php
             echo "<h2>".$lang['start']."</h2>";
             ?>
-                <input type="button" class="btnplay" value="<?php echo $lang['btn'] ?>">
+            <a href="game.php" class="btnplay"><?php echo $lang['btn'] ?></a>
             </div>
         </div>
     </div>
