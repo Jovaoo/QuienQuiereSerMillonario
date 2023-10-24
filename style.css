@@ -1,0 +1,141 @@
+:root {
+    --verdeOscuro: #184848;
+    --verdeNormal: #006060;
+    --verdeClaro: #007878;
+    --verdePantano: #A8C030;
+    --crema: #F0F0D8;
+  }
+
+body, *{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #007878;
+
+}
+a img{
+    width: 4vw;
+    max-width: 50px;
+}
+.langs{
+    margin: 1vw;
+    text-align: right;
+}
+h1{
+    text-align: center;
+}
+.main{
+    display: flex;
+}
+.left{
+    width: 50%;
+}
+#juanra{
+    width: 40vw;
+}
+.right{
+    border: 1px solid #184848;
+    background-color: #006060;
+    display: flex;
+}
+.play{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin: auto;
+}
+.play h2{
+    text-shadow: 3px 3px 3px black;
+    font-size: 3rem;
+    color: white;
+}
+.btnplay{
+    width: 10vw;
+    height: 5vh;
+    margin:auto;
+    background-color: #a8c030;
+}
+
+/* Página de win & lose */
+ 
+.circle {
+    width: 250px;
+    height: 250px;
+    border: 1px solid #000;
+    border-radius: 50%;
+}
+
+/* Botones */
+
+.ff {
+    display: flex;
+    flex-direction: column;
+    margin: 100px;
+}
+
+.btn {
+    height: 30px;
+    margin: 10px;
+    border-radius: 20px;
+    text-align: center;
+    color: #000;
+    text-decoration: none;
+    background-color:#a8c030;
+}
+
+/* Ranking */
+
+.borderRanking {
+    background-color: var(--verdeOscuro);
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    color: #fff;
+    border-radius: 20px;
+}
+
+.backHome {
+    margin: 25px;
+}
+    
+.fa-circle-left {
+    font-size: 50px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.ranking {
+    margin: 0 auto 20px auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000;
+    width: 50%;
+    height: 500px;
+    align-items: center;
+}
+
+.ranking > h1 {
+    font-size: 50px;
+    margin-top: 25px;
+}
+
+.topRank {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.namePlayerRank {
+    width: 40%;
+    padding-left: 20px;
+    line-height: 200%;
+
+}
+
+.pointsPlayerRank,.timePlayerRank, .totalPlayerRank  {
+    width: 20%;
+    text-align: center;
+    line-height: 200%;
+
+}
