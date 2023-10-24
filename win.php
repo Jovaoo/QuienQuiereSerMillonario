@@ -43,7 +43,6 @@ require_once "idioma.php";
                 <img id="juanra" src="./imgs/juanra.webp" alt="" srcset="">
                 <div class="play"><?php echo "<h2>".$lang['start']."</h2>"; ?>
                 <a href="game.php" class="btnplay"><?php echo $lang['btn'] ?></a>
-                <a href="#" class="botonSonido" >Boton 1</a>
                 </div>
             </div>
 

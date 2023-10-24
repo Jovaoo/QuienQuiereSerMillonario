@@ -30,7 +30,7 @@ require_once "idioma.php";
             ?>
         </div>
         <div class="right">
-            <img id="juanra" src="./imgs/juanra.webp" alt="" srcset="">
+                <img id="juanra" src="imgs/juanra.webp" alt="" srcset="">
             <div class="play">
             <?php
             echo "<h2>".$lang['start']."</h2>";

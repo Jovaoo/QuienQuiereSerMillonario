@@ -7,7 +7,7 @@ if (isset($_GET['lang'])){
         $_SESSION['idioma']="english";
     else{
         $_SESSION['idioma']="catalan";
-    }       
+    } 
 
 }else if (!isset($_SESSION['idioma'])) {
     $_SESSION['idioma']= "spanish";
