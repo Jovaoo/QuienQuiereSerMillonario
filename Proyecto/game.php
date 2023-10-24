@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(isset($_POST['chngdif'])){
+    $_SESSION['diff'] = $_SESSION['diff'] + 1;
+}else{
+    $_SESSION['diff'] = 1;
+}
+echo $_SESSION['diff'];
 function selquest($numeropregunta){
     $file = fopen("quest/".$_SESSION['idioma']."_"."$numeropregunta".".txt","r");
     while(! feof($file)) {
@@ -43,7 +49,7 @@ function selquest($numeropregunta){
     }
     return $defq;
 }
-$countdif = 1;
+$countdif = $_SESSION['diff'];
 $countpr = 1;
 $defq = selquest($countdif);
 $arlong = count($defq);
@@ -110,10 +116,11 @@ function showq($numb,$qu,$rn){
     }
     ?>
     <div class= "quests">
-        <?php
-            echo "<a href='index.php' class='return' >Inicio</a>";
-            echo '<input type="button" class="next" value="Siguiente">';
-        ?>
+         <a href='index.php' class='return'>Inicio</a>
+        <form action="game.php" class="next" method="POST">
+            <input type="hidden" name="chngdif" value="1">
+            <input type="submit" value="">
+        </form>
     </div>
     <script>
         function checkans(element,qv,aa,n){
@@ -121,7 +128,6 @@ function showq($numb,$qu,$rn){
                 element.style.backgroundColor = 'green'
                 let num = parseInt(n)
                 num = num + 1
-                console.log(num)
                 let div = "quests" + (num)
                 if(num <= 3){
                 document.getElementById(div).style.display = "block"
