@@ -22,7 +22,10 @@ $lang=[
     "top3" => "Jugador 3",
     "statsTit" => "Tus estadísticas",
     "percentageCompleted" => "100",
-    "percentageCompleted2" => "completado"
+    "percentageCompleted2" => "completado",
+
+    # página game
+    "loseText" => "¡Has perdido!"
 
 ]
 

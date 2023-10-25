@@ -25,8 +25,10 @@ function audioHelpGame() {
 function checkans(element,qv,aa,n){
     if(qv === aa){
         element.style.backgroundColor = 'green'
+
         const sonido = cargarSonido("./sounds/correctChoice.wav");
         sonido.play()
+        
         let num = parseInt(n)
         num = num + 1
         let div = "quests" + (num)

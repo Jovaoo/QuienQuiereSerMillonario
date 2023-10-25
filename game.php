@@ -5,7 +5,6 @@ if(isset($_POST['chngdif'])){
 }else{
     $_SESSION['diff'] = 1;
 }
-echo $_SESSION['diff'];
 
 function selquest($numeropregunta){
     $file = fopen("quest/".$_SESSION['idioma']."_"."$numeropregunta".".txt","r");
@@ -76,8 +75,9 @@ function randq($al){
 function showq($numb,$qu,$rn){
     $numb += 1;
     $cr = [];
-    echo "<div id='quests".$numb."' class='quests".$numb."'>";
-    echo "<h2>Pregunta".$numb."</h2>";
+    echo "<div id='quests".$numb."' class='quests".$numb." questsPrincip'>";
+    echo "Pregunta de dificultad ". $_SESSION['diff'];
+
     echo "<h3>".$qu[$rn][0]."</h3>";
 
     for ($i=1; $i < 5 ; $i++) { 
@@ -87,13 +87,14 @@ function showq($numb,$qu,$rn){
             array_push($cr,$quf);
         }
     }
+    echo '<div class="answers">';
 
     for ($i=1; $i < 5 ; $i++) { 
         $quf = trim($qu[$rn][$i]);
             $quf = substr($quf,1);
             echo '<input type="button" class="btnpr" onclick="checkans(this, \''.$quf.'\', \''.$cr[0].'\', \''.$numb.'\')" value="'.$quf.'">';
         }
-        echo "</div>";
+        echo "</div></div>";
     return $cr;
 }
 ?>
@@ -103,6 +104,7 @@ function showq($numb,$qu,$rn){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $lang['titpag'] ?></title>
+    <link rel="stylesheet" href="style.css">
     <style>
         #quests2,#quests3{
             display:none;
@@ -121,10 +123,10 @@ function showq($numb,$qu,$rn){
     }
     ?>
     <div class= "quests">
-         <a href='lose.php' class='return'>Volver</a>
+         <a href='lose.php' class='return'><?php echo $lang['loseText'] ?></a>
         <form action="game.php" class="next" method="POST">
             <input type="hidden" name="chngdif" value="1">
-            <input type="submit" value="">
+            <input type="submit" value="Avanzar al siguiente nivel" class="submitt">
         </form>
     </div>
     <script src="./app.js"></script>
