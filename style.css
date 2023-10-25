@@ -96,12 +96,6 @@ a img{
     border-radius: 5px;
 }
 
-.right > img {
-    position: absolute;
-    top: 35px;
-}
-
-
 /* —————————————— Página de win & lose —————————————— */
 
 .circle {
