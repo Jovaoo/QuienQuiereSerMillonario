@@ -1,15 +1,16 @@
 <?php
 $lang=[
     "titpag"=>'Who Wants to be Millonaire',
-    "tit"=>'Welcome to... <br> who wants to be millonaire',
+    "tit"=>'Welcome to... <br> who wants to be millonaire?',
     "btn"=>"Play",
     "start"=>"Start the Game!",
-    "instructions" => "Instructions",
-    "viewRanking" => "See ranking",
-    "ins1"=>"b",
-    "ins2"=>"b",
-    "ins3"=>"b",
-    "ins4"=>"b",
+    "ins" => "Instructions",
+    "ins1"=>"The game consists of a series of questions divided into difficulties, with each difficulty having 3 questions.",
+    "ins2"=>"If you answer the 3 questions correctly, you will move on to the next difficulty, continuing until you answer all 18 questions correctly.",
+    "ins3"=>"In case you make a mistake, you will lose the game and, therefore, you will have to start from scratch.",
+    "viewRanking"=>"View ranking",
+    "next" => "Next",
+
 
     # página win
     "winTit" => "Congratulations!",
@@ -24,9 +25,13 @@ $lang=[
     "percentageCompleted" => "100",
     "percentageCompleted2" => "completed",
 
-    # página game
-    "loseText" => "You lose!"
-    
+    # página ranking
+    "titRanking" => "Ranking",
+    "namePlayer" => "Name",
+    "pointsPlayer" => "Points",
+    "timePlayer" => "Time",
+    "totalPlayer" => "Total",    
+
 ]
 
 

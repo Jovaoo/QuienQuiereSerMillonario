@@ -1,5 +1,26 @@
 <?php
 require_once "idioma.php";
+$ses = session_id();
+session_destroy();
+function sendrank($idus, $preac, $name){
+    $reg = [$idus, $preac, $name];
+    $file2 = fopen("records/records.txt", "a");
+    fwrite($file2, implode(',', $reg). PHP_EOL);
+    fclose($file2);
+}
+
+if(isset($_POST['prac'])){
+    $pracValue = $_POST['prac'];
+} else {
+    $pracValue = 'NULL';
+}
+if(isset($_POST['sendr'])){
+    $vpa = $_POST['pac'];
+    $nusr = $_POST['nameusr'];
+    sendrank($ses,$vpa,$nusr);
+    unset($_POST['sendr']);
+    header('Location: lose.php');}
+    
 
 ?>
 <!DOCTYPE html>
@@ -36,16 +57,31 @@ require_once "idioma.php";
             <div class="stats">
                 <?php echo "<h2>".$lang['statsTit']."</h2>"; ?>
                 <div class="circle"></div>
-                <?php echo "<p>".$lang['percentageCompleted']."% ".$lang['percentageCompleted2']."</p>"; ?> <!-- aqui va el porcentaje de aciertos no el languaje /-->
+                <?php echo "<p>".$lang['percentageCompleted']."% ".$lang['percentageCompleted2']."</p>"; ?> <!-- aqui va el porcentage de aciertos no el languaje /-->
             </div>
 
             <div class="playAgain">
                 <img id="juanra" src="./imgs/juanra.webp" alt="" srcset="">
                 <div class="play">
                 <?php echo "<h2>".$lang['start']."</h2>"; ?>
-                <a href="game.php" class="btnplay"><?php echo $lang['btn'] ?></a>
+                <a href="index.php" class="btnplay"><?php echo $lang['btn'] ?></a>
                 </div>
             </div>
+            <!-- <div class="rank">
+                
+                <?php
+                #if(!isset($_POST['sendr'])){
+                    #echo '<form action="" method="post">';
+                    #echo '<input type="hidden" name="sendr">';
+                    #echo '<input type="hidden" name="pac" value="'.$pracValue.'">';
+                    #echo '<input type="text" name="nameusr">';               
+                    #echo '<input type="submit" value="Enviar">';
+                    #echo '</form>';
+                #}else{
+                   # echo "Se ha enviado los datos al ranking";
+                #}
+                    ?>
+            </div> -->
 
         </div>
     </div>

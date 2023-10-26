@@ -20,17 +20,44 @@ function audioHelpGame() {
     sonido.play()
 }
 
+// Función scroll automático
+
+function scrollToBottom(timedelay=0) {
+    var scrollId;
+    var goToQuest = element.getElementsByClassName("");
+    var minScrollHeight = 100;
+    scrollId = setInterval(function () {
+        if (height <= document.body.scrollHeight) {
+            window.scrollBy(0, minScrollHeight);
+        }
+        else {
+            clearInterval(scrollId);
+        }
+        height += minScrollHeight;
+    }, timedelay);           
+}
+
+
 // Funciones comprobar respuestas   
 
-function checkans(element,qv,aa,n){
-    if(qv === aa){
-        element.style.backgroundColor = 'green'
 
-        const sonido = cargarSonido("./sounds/correctChoice.wav");
+function checkans(element,encodedQuf,encodedCr,n,cpc){
+    var qv = atob(encodedQuf);
+    var aa = atob(encodedCr);
+    let num = parseInt(n)
+    num = num + 1
+    let rc = 0
+    if(cpc == 1){
+        rc = num - 2;
+    }else{
+        rc = ((cpc -1 ) * 3 ) + (num - 2)
+    }
+    if(qv === aa){
+        document.getElementById('pregac').value= rc
+        element.style.backgroundColor = 'green'
+        const sonido = cargarSonido("./sounds/correctChoice.wav")
         sonido.play()
-        
-        let num = parseInt(n)
-        num = num + 1
+
         let div = "quests" + (num)
         if(num <= 3){
         document.getElementById(div).style.display = "block"
@@ -39,14 +66,13 @@ function checkans(element,qv,aa,n){
             document.getElementsByClassName('next')[0].style.display = "block";
         }
         let parentDiv = element.closest('.quests' + n)
-        console.log(parentDiv)
         let buttons = parentDiv.getElementsByClassName('btnpr');
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].disabled = true;
         }
-
 }
     else{
+        document.getElementById('pregac').value= rc
         element.style.backgroundColor = 'red';
         const sonido = cargarSonido("./sounds/incorrectChoice.wav");
         sonido.play()
