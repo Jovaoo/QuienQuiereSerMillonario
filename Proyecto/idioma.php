@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_id();
 if (isset($_GET['lang'])){
     if ($_GET['lang']=="es")
         $_SESSION['idioma']="spanish";

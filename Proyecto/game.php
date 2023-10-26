@@ -1,13 +1,17 @@
 <?php
-session_start();
+require_once "idioma.php";
 if(isset($_POST['chngdif'])){
     $_SESSION['diff'] = $_SESSION['diff'] + 1;
 }else{
     $_SESSION['diff'] = 1;
 }
-echo $_SESSION['diff'];
+
 function selquest($numeropregunta){
     $file = fopen("quest/".$_SESSION['idioma']."_"."$numeropregunta".".txt","r");
+    if ($_SESSION['diff'] == 7) {
+        header('Location:win.php');
+        
+    }else{
     while(! feof($file)) {
         $line = "";
         while(!feof($file)){
@@ -48,6 +52,7 @@ function selquest($numeropregunta){
         array_push($defq,$qss);
     }
     return $defq;
+    }
 }
 $countdif = $_SESSION['diff'];
 $countpr = 1;
@@ -71,9 +76,9 @@ function randq($al){
 function showq($numb,$qu,$rn){
     $numb += 1;
     $cr = [];
-    echo "<div id='quests".$numb."' class='quests".$numb."'>";
-    echo "<h2>Pregunta".$numb."</h2>";
-    echo "<h3>".$qu[$rn][0]."</h3>";
+    echo "<div id='quests".$numb."' class='quests".$numb." questsPrincip'>\n";
+    echo "<h2>Pregunta".$numb."</h2>\n";
+    echo "<h3>".$qu[$rn][0]."</h3>\n";
 
     for ($i=1; $i < 5 ; $i++) { 
         $quf = trim($qu[$rn][$i]);
@@ -82,13 +87,22 @@ function showq($numb,$qu,$rn){
             array_push($cr,$quf);
         }
     }
-
-    for ($i=1; $i < 5 ; $i++) { 
+    echo '<div class="answers">';
+    for ($i=1; $i < 5; $i++) { 
         $quf = trim($qu[$rn][$i]);
-            $quf = substr($quf,1);
-            echo '<input type="button" class="btnpr" onclick="checkans(this, \''.$quf.'\', \''.$cr[0].'\', \''.$numb.'\')" value="'.$quf.'">';
-        }
-        echo "</div>";
+        $quf = substr($quf, 1);
+    
+        $encodedQuf = base64_encode($quf);
+        $encodedCr = base64_encode($cr[0]);
+        $encodedNumb = base64_encode($numb);
+        $encodedDiff = base64_encode($_SESSION['diff']);
+    
+        echo '<input type="button" class="btnpr" onclick="checkans(this, \''.$encodedQuf.'\', \''.$encodedCr.'\', \''.$numb.'\',\''.$_SESSION['diff'].'\')" value="'.$quf.'">';
+    }
+    
+        echo "</div></div>";
+    
+    
     return $cr;
 }
 ?>
@@ -97,7 +111,9 @@ function showq($numb,$qu,$rn){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?php echo $lang['titpag'] ?></title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
     <style>
         #quests2,#quests3{
             display:none;
@@ -111,51 +127,21 @@ function showq($numb,$qu,$rn){
     <?php
     $numq = randq($arlong);
     for ($i=0; $i < 3; $i++) { 
-        showq($i,$defq,$numq[$i],);
+        showq($i,$defq,$numq[$i]);
         
     }
     ?>
     <div class= "quests">
-         <a href='index.php' class='return'>Inicio</a>
+        <form action="lose.php" method="post" class="return" >
+            <input type="hidden" name="prac" id = "pregac" value="">
+            <input type="submit" value="Siguiente">
+        </form>
         <form action="game.php" class="next" method="POST">
             <input type="hidden" name="chngdif" value="1">
-            <input type="submit" value="">
+            <input type="hidden" name="prac" id = "pregac"value="">
+            <input type="submit" value="Siguiente">
         </form>
     </div>
-    <script>
-        function checkans(element,qv,aa,n){
-            if(qv === aa){
-                element.style.backgroundColor = 'green'
-                let num = parseInt(n)
-                num = num + 1
-                let div = "quests" + (num)
-                if(num <= 3){
-                document.getElementById(div).style.display = "block"
-                }
-                if(num == 4){
-                    document.getElementsByClassName('next')[0].style.display = "block";
-                }
-                let parentDiv = element.closest('.quests' + n)
-                console.log(parentDiv)
-                let buttons = parentDiv.getElementsByClassName('btnpr');
-                for (let i = 0; i < buttons.length; i++) {
-                    buttons[i].disabled = true;
-                    
-                }
-        }
-            else{
-                element.style.backgroundColor = 'red';
-                let parentDiv = element.closest('.quests' + n);
-                let buttons = parentDiv.getElementsByClassName('btnpr');
-                for (let i = 0; i < buttons.length; i++) {
-                    if (buttons[i].value === aa) {
-                        buttons[i].style.backgroundColor = 'green'
-                    }
-                    buttons[i].disabled = true;
-                    document.getElementsByClassName('return')[0].style.display = "block";
-                }
-            }
-        }
-    </script>
+    <script src="./app.js"></script>
 </body>
 </html>
