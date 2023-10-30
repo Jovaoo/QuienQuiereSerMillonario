@@ -20,7 +20,26 @@ function audioHelpGame() {
     sonido.play()
 }
 
+// Función scroll automático
+
+function scrollToBottom(timedelay=0) {
+    var scrollId;
+    var goToQuest = element.getElementsByClassName("");
+    var minScrollHeight = 100;
+    scrollId = setInterval(function () {
+        if (height <= document.body.scrollHeight) {
+            window.scrollBy(0, minScrollHeight);
+        }
+        else {
+            clearInterval(scrollId);
+        }
+        height += minScrollHeight;
+    }, timedelay);           
+}
+
+
 // Funciones comprobar respuestas   
+
 
 function checkans(element,encodedQuf,encodedCr,n,cpc){
     var qv = atob(encodedQuf);
@@ -68,3 +87,5 @@ function checkans(element,encodedQuf,encodedCr,n,cpc){
         }
     }
 }
+document.getElementById("btnplayind").style.display = "block";
+document.getElementById("jsno").style.display = "none";

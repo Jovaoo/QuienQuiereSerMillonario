@@ -1,5 +1,10 @@
 <?php
 require_once "idioma.php";
+if($_SESSION['finished'] == 1){
+    header('Location:index.php');
+}else{
+
+
 if(isset($_POST['chngdif'])){
     $_SESSION['diff'] = $_SESSION['diff'] + 1;
 }else{
@@ -77,7 +82,7 @@ function showq($numb,$qu,$rn){
     $numb += 1;
     $cr = [];
     echo "<div id='quests".$numb."' class='quests".$numb." questsPrincip'>\n";
-    echo "<h2>Pregunta".$numb."</h2>\n";
+    # echo "<h2>Pregunta".$numb."</h2>\n";
     echo "<h3>".$qu[$rn][0]."</h3>\n";
 
     for ($i=1; $i < 5 ; $i++) { 
@@ -104,6 +109,7 @@ function showq($numb,$qu,$rn){
     
     
     return $cr;
+}
 }
 ?>
 <!DOCTYPE html>
@@ -134,12 +140,12 @@ function showq($numb,$qu,$rn){
     <div class= "quests">
         <form action="lose.php" method="post" class="return" >
             <input type="hidden" name="prac" id = "pregac" value="">
-            <input type="submit" value="Siguiente">
+            <input type="submit" value="<?php echo $lang['next'] ?>" class="submitt">
         </form>
         <form action="game.php" class="next" method="POST">
             <input type="hidden" name="chngdif" value="1">
             <input type="hidden" name="prac" id = "pregac"value="">
-            <input type="submit" value="Siguiente">
+            <input type="submit" value="Siguiente" class="submitt">
         </form>
     </div>
     <script src="./app.js"></script>
