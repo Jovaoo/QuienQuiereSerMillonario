@@ -112,7 +112,6 @@ function checkans(element,encodedQuf,encodedCr,n,cpc){
         rc = ((cpc -1 ) * 3 ) + (num - 2)
     }
     if(qv === aa){
-
         document.getElementById('pregac').value= rc
         console.log(document.getElementById('pregac').value)
         element.style.backgroundColor = 'green'
@@ -172,5 +171,5 @@ function totalCorrectAnswers() {
     circlePct[0].style.backgroundImage = `conic-gradient(var(--verdePantano) ${pctCorrectas}%, var(--crema) ${pctCorrectas}% 100%)`;
 }
 console.log(1);
-document.getElementById("btnplayind").style.display = "block";
+document.getElementById("btnplayindjs").style.display = "block";
 document.getElementById("jsno").style.display = "none";

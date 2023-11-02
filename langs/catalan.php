@@ -10,6 +10,8 @@ $lang=[
     "ins3"=>"En cas que fallis, perdràs la partida i, per tant, hauràs de començar de zero.",
     "viewRanking"=>"Veure el ranking",
     "next" => "Següent",
+    "js" => "No tens JavaScript activat, activa'l per poder jugar",
+
 
     # página win y lose
     "winTit" => "Felicitats!",

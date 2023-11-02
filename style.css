@@ -67,6 +67,11 @@ a img{
     margin: 20px 20px 0 0;
 }
 
+#jsno {
+    text-align: center;
+    padding: 25px;
+}
+
 .langs img {
     box-shadow:  20px 20px 60px #143d3d,
     -20px -20px 60px #1c5353;
@@ -172,8 +177,19 @@ a img{
     text-decoration: none;
     color: #000;
     box-shadow:  1px 1px 5px #000;
-}
 
+}
+#btnplayindjs {
+    border-radius: 10px;
+    width: 50%;
+    text-align: center;
+    background: var(--verdePantano);
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+    display: none;
+    box-shadow:  1px 1px 5px #000;
+}
 
 @media only screen and (max-width: 720px) {
     .main {
@@ -400,6 +416,21 @@ a img{
 }
 
 .rank > a {
+    margin-top: 30px;
+    padding: 10px;
+    font-size: 25px;
+    font-family: "BebasNeue-Regular";
+    background-color: #A8C030;
+    text-decoration: none;
+    color: #000;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 25px;
+    border: 0;
+    box-shadow: 1px 3px 3px 3px rgba(0, 0, 0, 0.38);
+}
+
+.rankingMainR {
     margin-top: 30px;
     padding: 10px;
     font-size: 25px;

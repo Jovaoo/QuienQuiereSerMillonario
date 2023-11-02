@@ -2,10 +2,10 @@
     require_once "idioma.php";
 
 function compararSegundoElemento($a, $b) {
-        if ($a[1] == $b[1]) {
+        if ($a[2] == $b[2]) {
             return 0;
         }
-        return ($a[1] > $b[1]) ? -1 : 1;
+        return ($a[2] > $b[2]) ? -1 : 1;
 }  
 $file = fopen("records/records.txt", "r");
 $arrayrank = [];      

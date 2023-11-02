@@ -10,6 +10,7 @@ $lang=[
     "ins3"=>"In case you make a mistake, you will lose the game and, therefore, you will have to start from scratch.",
     "viewRanking"=>"View ranking",
     "next" => "Next",
+    "js" => "You don't have enabled JavaScript, enable it for playing",
 
 
     # página win

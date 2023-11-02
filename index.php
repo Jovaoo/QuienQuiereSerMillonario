@@ -57,8 +57,10 @@ if(isset($_POST['destroyses'])){
             <?php
             echo "<h2>".$lang['start']."</h2>";
             ?>
-            <a href="game.php" id="btnplayind" onclick="resetTime();empezarDetener()"><?php echo $lang['btn']?></a>
-            <p id="jsno">No tienes JavaScript activado</p>
+            <a href="game.php" id="btnplayindjs" onclick="resetTime();empezarDetener()"><?php echo $lang['btn']?></a>
+            <p id="jsno"><?php echo $lang['js']?></p>
+            <?php echo "<a href='./hallfame.php' class='rankingMainR'>" . $lang['seeHallFame'] . "</a>"; ?>
+
             </div>
         </div>
     </div>

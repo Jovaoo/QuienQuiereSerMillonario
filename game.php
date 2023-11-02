@@ -219,7 +219,7 @@ empezarDetener();
 
 
     <div class= "quests">
-        <form action="lose.php" method="post" class="return" >
+    <form action="lose.php" method="post" class="return" >
             <input type="hidden" name="prac" id = "pregac" value="">
             <input type="hidden" name="totalTime" id = "totalTime" value="">
             <input type="submit" value="<?php echo $lang['next'] ?>" class="submitt">
