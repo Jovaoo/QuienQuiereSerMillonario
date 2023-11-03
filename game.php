@@ -1,3 +1,4 @@
+<script src="./app.js"></script>
 <?php
 require_once "idioma.php";
 if(isset($_SESSION['finished'])){
@@ -81,8 +82,9 @@ function showq($numb,$qu,$rn){
     $numb += 1;
     $cr = [];
     echo "<div id='quests".$numb."' class='quests".$numb." questsPrincip'>\n";
-    # echo "<h2>Pregunta".$numb."</h2>\n";
+    echo "<h1 id='cronoLimite".$numb."'>01:00</h1>";
     echo "<h3>".$qu[$rn][0]."</h3>\n";
+
 
     for ($i=1; $i < 5 ; $i++) { 
         $quf = trim($qu[$rn][$i]);
@@ -191,6 +193,7 @@ empezarDetener();
     <title><?php echo $lang['titpag'] ?></title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
+    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
     <style>
         #quests2,#quests3{
             display:none;
@@ -202,22 +205,34 @@ empezarDetener();
 
 </head>
 
-<body>
+
+<body onload="empezarDetener();startCountdown();">
     <div class="cronoStatic">
-            <h2 id='crono'>00:00</h2 > 
+            <div class="static25">
+            </div>
+            <div class="static50">
+                <h2 id='crono'>00:00</h2 > 
+            </div>
+            <div class="static25">
+                <i class="fa-regular fa-circle-question"></i>
+                <i class="fa-solid fa-percent"></i>  
+                <i class="fa-regular fa-hourglass-half" onclick="comodinTiempo()"></i>
+            </div>
     </div>
 
 
     <?php
     $numq = randq($arlong);
-    for ($i=0; $i < 3; $i++) { 
-        showq($i,$defq,$numq[$i]);
-        
-    }
+    $contadorDivs = 1;
+    $primerDiv = true;
     
+    for ($i = 0; $i < 3; $i++) {
+        if ($contadorDivs <= 3) {
+            showq($i, $defq, $numq[$i]);
+        }
+    }   
     ?>  
-
-
+    
     <div class= "quests">
     <form action="lose.php" method="post" class="return" >
             <input type="hidden" name="prac" id = "pregac" value="">
@@ -232,7 +247,6 @@ empezarDetener();
         </form>
     </div>
 
-    <script src="./app.js"></script>
 
 </body>
 </html>

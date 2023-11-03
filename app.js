@@ -86,6 +86,10 @@ function scrollToBottom(timedelay=0) {
             inicio = parseInt(localStorage.getItem("inicio"));
             funcionando();
         }
+        if (localStorage.getItem("limit")) {
+            limit = parseInt(localStorage.getItem("limit"));
+            funcionandoLimit();
+        }
     }
 
     function saveTime(){
@@ -96,8 +100,74 @@ function scrollToBottom(timedelay=0) {
         document.getElementById("totalTime").value = result;
     }
 
+//
+// —————————————— Cronómetro descendiente (preguntas) ——————————————
+//
+    let countdown = 60;
+    let timerInterval;
+    let currentDiv = 1;
+
+    var comodin1 = false;
+
+    function establecerComodines() {
+        localStorage.setItem("usedComodin1", 0)
+        localStorage.setItem("usedComodin2", 0)
+        localStorage.setItem("usedComodin3", 0)
+    }
+
+    function comodinTiempo() {
+        comodin1 = true
+    }
+
+    function startCountdown() {
+        if(localStorage.getItem("rcValue") >= 3) {
+            timerInterval = setInterval(function () {
+                countdown--;    
+                
+                if (comodin1 && localStorage.getItem("usedComodin1") == 0 ) {
+                    countdown = countdown + 30;
+                    usedComodin = true;
+                    localStorage.setItem("usedComodin1", 1)
+
+                }
+                const minutes = Math.floor(countdown / 60);
+                const seconds = countdown % 60;
+                const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (countdown < 10) {
+                    document.getElementById('cronoLimite'+currentDiv).style = "color:red";
+                }
+                document.getElementById('cronoLimite'+currentDiv).textContent = formattedTime;
+
+
+                if (countdown === 0) {
+                    clearInterval(timerInterval);
+                    window.location.href = 'lose.php';
+                }
+            }, 1000);
+        } else {
+            document.getElementById('cronoLimite1').style = "display:none";
+            document.getElementById('cronoLimite2').style = "display:none";
+            document.getElementById('cronoLimite3').style = "display:none";
+        }
+    }
+
+    function stopCountdown() {
+        clearInterval(timerInterval);
+        countdown = 60; 
+    }
+
+    function showNextDiv() {
+        stopCountdown();
+        if (currentDiv > 3) {
+            currentDiv = 0
+        }
+        startCountdown();
+        currentDiv++;
+    }
+
     
-    // —————————————— Funciones comprobar respuestas ——————————————
+// —————————————— Funciones comprobar respuestas ——————————————
 
 
 function checkans(element,encodedQuf,encodedCr,n,cpc){
@@ -111,9 +181,9 @@ function checkans(element,encodedQuf,encodedCr,n,cpc){
     }else{
         rc = ((cpc -1 ) * 3 ) + (num - 2)
     }
+
     if(qv === aa){
         document.getElementById('pregac').value= rc
-        console.log(document.getElementById('pregac').value)
         element.style.backgroundColor = 'green'
         const sonido = cargarSonido("./sounds/correctChoice.wav")
         sonido.play()
@@ -132,10 +202,15 @@ function checkans(element,encodedQuf,encodedCr,n,cpc){
         }
         
         localStorage.setItem("rcValue", rc+1); // Guarda las respuestas correctas
-        scrollToBottom()
+        scrollToBottom();
+
+        if(localStorage.getItem("rcValue") >= 3) {
+            showNextDiv();
+        }
 }
     else{
         saveTime()
+        stopCountdown();
         document.getElementById('pregac').value= rc
         element.style.backgroundColor = 'red';
         const sonido = cargarSonido("./sounds/incorrectChoice.wav");
@@ -170,6 +245,5 @@ function totalCorrectAnswers() {
     circlePct = document.getElementsByClassName("circle");
     circlePct[0].style.backgroundImage = `conic-gradient(var(--verdePantano) ${pctCorrectas}%, var(--crema) ${pctCorrectas}% 100%)`;
 }
-console.log(1);
 document.getElementById("btnplayindjs").style.display = "block";
 document.getElementById("jsno").style.display = "none";

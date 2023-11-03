@@ -46,18 +46,6 @@ a img{
     max-width: 50px;
 }
 
-
-.cronoStatic {
-    position: sticky;
-    top:0;
-    border-bottom: 1px solid var(--crema);
-    background: var(--verdeOscuro);
-    color: #fff;
-    text-shadow: 2px 2px #000;
-    text-align: center;
-    font-size: 25px;
-}   
-
 /* —————————————— Página de inicio —————————————— */
 
 .langs {
@@ -270,6 +258,48 @@ a img{
     margin-bottom: 25px;
     border: 0;
     box-shadow: 1px 3px 3px 3px rgba(0, 0, 0, 0.38);
+}
+
+
+.cronoStatic {
+    position: sticky;
+    top:0;
+    border-bottom: 1px solid var(--crema);
+    background: var(--verdeOscuro);
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 5px 0 5px 0;
+}   
+.cronoStatic > .static50{
+    width: 50%;
+    text-shadow: 2px 2px #000;
+
+}
+
+.cronoStatic > .static25 {
+    width: 25%;
+    text-align: end;
+    margin-right: 25px;
+}
+
+.static25 > i {
+    padding: 10px 15px  10px 15px;
+    border-radius: 50%;
+    background: var(--verdePantano);
+    color: #000;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.static25 > i:nth-child(1) {
+    padding: 10px 12px 10px 12px;
+    border-radius: 50%;
+    background: var(--verdePantano);
+    cursor: pointer;
 }
 
 

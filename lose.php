@@ -68,7 +68,6 @@ if (!isset($_SESSION['ptTotal'])) {
 if (isset($_POST['sendr'])) {
     $vpa = $_POST['pac'];
     $nusr = $_POST['nameusr'];
-    $totaltime =  $_POST['totalTime'];
     sendrank($ses, $nusr, $vpa);
     $_SESSION['hecho'] = 1;
     header('Location: lose.php');
