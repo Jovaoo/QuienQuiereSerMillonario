@@ -1,5 +1,28 @@
 <?php
-require_once "idioma.php";
+if(isset($_POST['destroyses'])){
+    session_destroy();
+    require_once "idioma.php";
+    session_id();
+    session_regenerate_id();
+    echo session_id();
+    unset($_SESSION['hecho']);
+    header('Location:index.php');
+    unset($_SESSION["totalTime"]);
+    unset($_SESSION["totalTimeCounter"]);
+    unset($_SESSION["puntuacionTotal"]);
+    unset($_SESSION["ptTotal"]);
+}else{
+    require_once "idioma.php";
+    unset($_SESSION["finished"]);
+    unset($_SESSION["totalTime"]);
+    unset($_SESSION["totalTimeCounter"]);
+    unset($_SESSION["puntuacionTotal"]);
+    unset($_SESSION["ptTotal"]);
+
+
+
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -25,33 +48,25 @@ require_once "idioma.php";
             <div class="instructions">
                 <?php
                     echo "<h3>".$lang['ins']."</h3>";
-                    echo "<p>".$lang['ins1']."</p>";
-                    echo "<p>".$lang['ins2']."</p>";
+                    echo "<p>".$lang['ins1']."</p><br>";
+                    echo "<p>".$lang['ins2']."</p><br>";
                     echo "<p>".$lang['ins3']."</p>";
-                ?>
-            </div>
-            <div class="top3main">
-                <?php
-                    echo "<h3>".$lang['bestPlayers']."</h3>";
-                    echo "<p>".$lang['top1']."</p>";
-                    echo "<p>".$lang['top2']."</p>";
-                    echo "<p>".$lang['top3']."</p>";
-                    echo "<a href='./ranking.php'>".$lang['viewRanking']."</a>";
-
                 ?>
             </div>
         </div>
         <div class="right">
-                <img id="juanra" src="imgs/juanra.webp" alt="" srcset="">
+                <img id="juanra" src="imgs/juanra.png" alt="" srcset="">
             <div class="play">
             <?php
             echo "<h2>".$lang['start']."</h2>";
             ?>
-            <a href="game.php" class="btnplay"><?php echo $lang['btn'] ?></a>
+            <a href="game.php" id="btnplayindjs" onclick="resetTime();establecerComodines();"><?php echo $lang['btn']?></a>
+            <p id="jsno"><?php echo $lang['js']?></p>
+            <?php echo "<a href='./hallfame.php' class='rankingMainR'>" . $lang['seeHallFame'] . "</a>"; ?>
             </div>
         </div>
     </div>
-
+    <script src="./app.js"></script>
 
 </body>
 </html>
