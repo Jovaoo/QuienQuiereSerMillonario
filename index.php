@@ -1,4 +1,5 @@
 <?php
+
 if(isset($_POST['destroyses'])){
     session_destroy();
     require_once "idioma.php";
@@ -34,7 +35,7 @@ if(isset($_POST['destroyses'])){
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
 </head>
-<body>
+<body">
     <div class="langs">
         <a  id="bt1" href="?lang=es"><img src="imgs/esp.png" alt="" srcset=""></a>
         <a  id="bt1" href="?lang=cat"><img src="imgs/cat.png" alt="" srcset=""></a>
