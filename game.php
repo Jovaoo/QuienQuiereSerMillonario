@@ -82,7 +82,7 @@ function showq($numb,$qu,$rn){
     $numb += 1;
     $cr = [];
     echo "<div id='quests".$numb."' class='quests".$numb." questsPrincip'>\n";
-    echo "<h1 id='cronoLimite".$numb."'>01:00</h1>";
+    echo "<h1 id='cronoLimite".$numb."'>00:30</h1>";
     echo "<h3>".$qu[$rn][0]."</h3>\n";
 
 
@@ -216,7 +216,7 @@ empezarDetener();
             <div class="static25">
                 <i class="fa-regular fa-circle-question"></i>
                 <i class="fa-solid fa-percent"></i>  
-                <i class="fa-regular fa-hourglass-half" onclick="comodinTiempo()"></i>
+                <i class="fa-regular fa-hourglass-half" onclick="comodinTiempo()" id="comodinTiempoCSS"></i>
             </div>
     </div>
 

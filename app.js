@@ -100,26 +100,32 @@ function scrollToBottom(timedelay=0) {
         document.getElementById("totalTime").value = result;
     }
 
+// Comodines 
+
+var comodin1 = false;
+
+function establecerComodines() {
+    localStorage.setItem("usedComodin1", 0)
+    localStorage.setItem("usedComodin2", 0)
+    localStorage.setItem("usedComodin3", 0)
+}
+
+function comodinTiempo() {
+    comodin1 = true
+}
+
 //
 // —————————————— Cronómetro descendiente (preguntas) ——————————————
 //
-    let countdown = 60;
+    let countdown = 30;
     let timerInterval;
     let currentDiv = 1;
-
-    var comodin1 = false;
-
-    function establecerComodines() {
-        localStorage.setItem("usedComodin1", 0)
-        localStorage.setItem("usedComodin2", 0)
-        localStorage.setItem("usedComodin3", 0)
-    }
-
-    function comodinTiempo() {
-        comodin1 = true
-    }
+    let colorFlag = true;
 
     function startCountdown() {
+        if (localStorage.getItem("usedComodin1") == 1) {
+            document.getElementById('comodinTiempoCSS').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
+        }
         if(localStorage.getItem("rcValue") >= 3) {
             timerInterval = setInterval(function () {
                 countdown--;    
@@ -127,34 +133,42 @@ function scrollToBottom(timedelay=0) {
                 if (comodin1 && localStorage.getItem("usedComodin1") == 0 ) {
                     countdown = countdown + 30;
                     usedComodin = true;
-                    localStorage.setItem("usedComodin1", 1)
-
-                }
-                const minutes = Math.floor(countdown / 60);
-                const seconds = countdown % 60;
-                const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-                if (countdown < 10) {
-                    document.getElementById('cronoLimite'+currentDiv).style = "color:red";
-                }
-                document.getElementById('cronoLimite'+currentDiv).textContent = formattedTime;
-
-
-                if (countdown === 0) {
-                    clearInterval(timerInterval);
-                    window.location.href = 'lose.php';
+                    localStorage.setItem("usedComodin1", 1);
+                    document.getElementById('comodinTiempoCSS').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
+                } else {
+                    const minutes = Math.floor(countdown / 60);
+                    const seconds = countdown % 60;
+                    const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+                    if (countdown < 10) {
+                        if (colorFlag) {
+                            document.getElementById('cronoLimite' + currentDiv).style.color = "red";
+                        } else {
+                            document.getElementById('cronoLimite' + currentDiv).style.color = "white";
+                        }
+                        colorFlag = !colorFlag;
+                    }
+    
+                    document.getElementById('cronoLimite'+currentDiv).textContent = formattedTime;
+    
+                    if (countdown === 0) {
+                        clearInterval(timerInterval);
+                        window.location.href = 'lose.php';
+                    }
                 }
             }, 1000);
         } else {
             document.getElementById('cronoLimite1').style = "display:none";
+            document.getElementById('comodinTiempoCSS').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
             document.getElementById('cronoLimite2').style = "display:none";
             document.getElementById('cronoLimite3').style = "display:none";
+
         }
     }
 
     function stopCountdown() {
         clearInterval(timerInterval);
-        countdown = 60; 
+        countdown = 30; 
     }
 
     function showNextDiv() {
@@ -245,5 +259,7 @@ function totalCorrectAnswers() {
     circlePct = document.getElementsByClassName("circle");
     circlePct[0].style.backgroundImage = `conic-gradient(var(--verdePantano) ${pctCorrectas}%, var(--crema) ${pctCorrectas}% 100%)`;
 }
+
+
 document.getElementById("btnplayindjs").style.display = "block";
 document.getElementById("jsno").style.display = "none";

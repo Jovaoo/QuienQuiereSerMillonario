@@ -1,5 +1,10 @@
 <?php
 require_once "idioma.php";
+if ($_SERVER['HTTP_REFERER'] == ""){
+    header("Location: error403.php");
+    exit();
+}
+ 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
