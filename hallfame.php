@@ -28,17 +28,19 @@ usort($arrayrank, 'compararSegundoElemento');
     <title><?php echo $lang['titpag'] ?></title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
+    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
     <div class="returnDiv">
-        <a href="./" class="returnHall">Volver</a>
+        <a href="./" class="returnHall"><i class="fa fa-solid fa-arrow-left-long"></i></a>
     </div>
     <div class="rankingMain">
     <h1>Ranking Hall of Fame</h1>
 
     <?php echo "<table class='rankingTable'>";
-    echo "<tr class='rankingTr firstRankTr'><td class='firstRank'>Sesión</td><td></td><td class='firstRank'>Nombre</td><td></td><td class='firstRank'>Total</td><td></td>";
+    echo "<tr class='rankingTr firstRankTr'><td class='firstRank'>Sesión&nbsp;&nbsp;<i class='fa-solid fa-id-badge'></i></td><td></td><td class='firstRank'>Nombre&nbsp;&nbsp;<i class='fa-solid fa-file-signature'></i></td><td></td><td class='firstRank'>Total</td><td></td>";
     foreach($arrayrank as $k){
         echo "<tr class='rankingTr'>";
         foreach($k as $j){

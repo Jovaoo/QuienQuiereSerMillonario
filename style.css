@@ -14,6 +14,11 @@ html {
     --rIncorrectas: #ff0000;
     --brShadow: -6px 6px 15px rgba(0,0,0,0.5);
     --tlShadow: 6px -6px 15px rgba(255,255,255,0.8);
+    --color1: #fab567;
+    --color2: #f98cc1;
+    --color3: #b2d5eb;
+    --color4: #fcd793;
+
 
 }
 
@@ -65,11 +70,23 @@ a img{
     -20px -20px 60px #1c5353;
 }
 
+.mainMain {
+    display:flex;
+    width: 100%;
+    justify-content:center;
+}
+
 .main {
     display: flex;
+    width: 75%;
     flex-direction: row;
-    margin: 50px;
+    margin: 25px;
     color: #fff;
+    box-shadow:  20px 20px 60px #143d3d,
+    -20px -20px 60px #1c5353;
+    border-radius: 25px;
+    background-color: var(--verdeNormal);
+
 }
 
 .top3main {
@@ -88,7 +105,7 @@ a img{
 }
 
 .left {
-    width: 40%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -124,13 +141,14 @@ a img{
 
 
 .right {
-    width: 60%;
+    width: 40%;
     display: flex;
+    position: absolute;
     margin: 50px;
     background: var(--verdeOscuro);
     box-shadow:  20px 20px 60px #143d3d,
     -20px -20px 60px #1c5353;
-
+    right: 70Px;
     border-radius: 25px;
     font-size: 30px;
 
@@ -142,6 +160,7 @@ a img{
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-right: 20px;
 }
 
 .play > h2 {
@@ -149,6 +168,7 @@ a img{
     text-shadow: 
     -8px -8px 12px rgba(0, 0, 0, 0.2),
     8px 8px 12px rgba(30, 30, 30, 0.18);
+    text-align:center;
 }
 
 .instructions {
@@ -245,7 +265,7 @@ a img{
     align-items: center;
 }
 
-.next > .submitt, .return > .submitt {
+.next > .submitt, .return > .submitt, .winRed > .submitt {
     width: 200%;
     height: 100px;  
     font-size: 25px;
@@ -258,6 +278,7 @@ a img{
     margin-bottom: 25px;
     border: 0;
     box-shadow: 1px 3px 3px 3px rgba(0, 0, 0, 0.38);
+    cursor: pointer;
 }
 
 
@@ -309,6 +330,18 @@ a img{
     display: flex;
     justify-content: center;
     width: 100%;
+}
+
+.mainFinal {
+    display: flex;
+    flex-direction: row;
+    margin: 25px;
+    color: #fff;
+    box-shadow:  20px 20px 60px #143d3d,
+    -20px -20px 60px #1c5353;
+    border-radius: 25px;
+    background-color: var(--verdeNormal);
+
 }
 
 .msgFinal {
@@ -492,7 +525,7 @@ a img{
     -8px -8px 12px rgba(31, 31, 31, 0.4),
     8px 8px 12px rgba(0, 0, 0, 0.58);
     margin-bottom: 40px;
-    font-size: 50px
+    font-size: 75px
 }
 
 .rankingTable {
@@ -551,9 +584,12 @@ tbody {
 }
 
 .returnHall {
-    border-radius: 10px;
-    width: 50%;
+    border-radius: 50%;
+    width: 2.5%;
+    display: flex;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     background: var(--verdePantano);
     padding: 10px;
     text-decoration: none;
@@ -561,4 +597,129 @@ tbody {
     box-shadow:  1px 1px 5px #000;
     font-size: 40px;
     margin: 25px;
+}
+
+/* —————————————— Página de Error 403 —————————————— */
+
+
+.error403 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 200%;
+    color: #fff;
+    text-shadow: 
+    -8px -8px 12px rgba(31, 31, 31, 0.4),
+    8px 8px 12px rgba(0, 0, 0, 0.58);
+}
+
+.error403 > h1 {
+    font-size: 150px;
+}
+
+.error403 > h2 {
+    font-size: 100px;
+}
+
+.error403 > p {
+    font-size: 40px;
+}
+
+/* —————————————— Animación público —————————————— */
+
+
+
+#contenedor{ 
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.4); 
+    margin: 50px;
+    display: grid;
+    place-content: center;
+    height: 50%;
+    width: 50%;
+    color: #000;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 25px;
+}
+  .cargando{ 
+    position: relative; 
+    color: #FFF;
+    margin-top: 2em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase
+  }
+  
+  .contenedor-loader{  
+    width: 180px;
+      height: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin: 0 auto; 
+  }
+  .contenedor-loader div{ 
+    width: 30px;
+    height: 30px;
+    background-color: #FFF;
+    animation: salto 1s alternate
+      infinite;
+  }
+  .contenedor-loader div:nth-child(2){ 
+    animation-delay: 0.20s; 
+  }
+  .contenedor-loader div:nth-child(3){ 
+    animation-delay: 0.40s; 
+  }
+  .contenedor-loader div:nth-child(4){ 
+    animation-delay: 0.60s; 
+  }
+  @keyframes salto {
+      from {
+          opacity: 1;
+      }
+      to{
+           opacity: 0;
+      }
+  }
+
+#circlePublicMain1, #circlePublicMain2, #circlePublicMain3 {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.circleMain {
+    width: 50%;
+    display: flex;
+    justify-content: right;
+    margin-right: 25px;
+}
+
+#answersPublic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin-left: 25px;
+
+}
+
+#circlePublic {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin: 5px;
+}   
+
+#answersPublic > h1 {
+    text-shadow: 
+    -8px -8px 12px rgba(31, 31, 31, 0.4),
+    8px 8px 12px rgba(0, 0, 0, 0.58);
 }

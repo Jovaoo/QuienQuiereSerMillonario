@@ -7,7 +7,12 @@ $lang=[
     "ins" => "Instrucciones",
     "ins1"=>"El juego consiste en una serie de preguntas divididas en dificultades, cada dificultad tendrá 3 preguntas.",
     "ins2"=>"Si aciertas las 3 preguntas, pasarás a la siguiente dificultad así hasta responder las 18 preguntas correctamente.",
-    "ins3"=>"En caso de que falles, perderás la partida y por tanto, tendrás que empezar de 0",
+    "ins3"=>"En caso de que falles, perderás la partida y por tanto, tendrás que empezar de 0.",
+
+    "com" => "Comodines",
+    "com1" => "Comodín Público: Al usarlo te muestra una estadística donde el 80% de las veces te mostrará la respuesta correcta (1 vez por partida).",
+    "com2" => "Comodín 50%: Al usarlo te oculta 2 de las 4 respuestas, las cuales eran incorrectas (1 vez por partida). ",
+    "com3" => "Comodín Tiempo: Al usarlo, te añade 30 segundos más al tiempo de pregunta (1 vez por partida).",
     "viewRanking"=>"Ver ranking",
     "next" => "Siguiente",
     "js" => "No tienes JavaScript activado, actívalo para poder jugar",
@@ -35,6 +40,10 @@ $lang=[
     "pointsPlayer" => "Puntos",
     "timePlayer" => "Tiempo",
     "totalPlayer" => "Total",
+
+    # página forbidden
+    "forbidden" => "Prohibido",
+    "forbiddenText" => "¡El acceso directo a esta página está prohibido!",
 
 ]
 

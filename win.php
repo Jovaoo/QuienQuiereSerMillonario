@@ -1,10 +1,12 @@
 <?php
 require_once "idioma.php";
+
 if ($_SERVER['HTTP_REFERER'] == ""){
     header("Location: error403.php");
     exit();
 }
- 
+
+// Iniciar la sesión si no está iniciada
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -44,7 +46,6 @@ if (isset($_SESSION['startTime'])) {
     $startTime = $_SESSION['startTime'];
     $currentTime = time();
 
-    // tiempo transcurrido
     $elapsedTime = $currentTime - $startTime;
 
     if ($elapsedTime >= 30) {
@@ -67,7 +68,6 @@ if (!isset($_SESSION['ptTotal'])) {
 if (isset($_POST['sendr'])) {
     $vpa = $_POST['pac'];
     $nusr = $_POST['nameusr'];
-    $totaltime =  $_POST['totalTime'];
     sendrank($ses, $nusr, $vpa);
     $_SESSION['hecho'] = 1;
     header('Location: lose.php');
@@ -79,13 +79,20 @@ if (isset($_POST['sendr'])) {
     <html lang="en">
 
     <script src="./app.js"></script>
+    <script>
+        const sonido = cargarSonido("./sounds/winGame.mp3");
+        sonido.play()
+
+        document.getElementById('returnForm').submit()
+    </script>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $lang['titpag'] ?></title>
+        <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
         <link rel="stylesheet" href="style.css">
     </head>
-    <body onload="audioWinGame()">
+    <body onload=" audioHelpGame();">
         <div class="langs">
             <a  id="bt1" href="?lang=es"><img src="imgs/esp.png" alt="" srcset=""></a>
             <a  id="bt1" href="?lang=cat"><img src="imgs/cat.png" alt="" srcset=""></a>
@@ -95,7 +102,7 @@ if (isset($_POST['sendr'])) {
             <?php echo "<h1>" . $lang['winTit'] . "</h1>"; ?>
             <?php echo "<h4>" . $lang['winTit2'] . "</h4>"; ?>
         </div>
-        <div class="main">
+        <div class="mainFinal">
             <div class="stats">
                 <?php echo "<h2>" . $lang['statsTit'] . "</h2>"; ?>
                 <div class="circle"></div>

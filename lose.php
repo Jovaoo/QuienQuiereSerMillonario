@@ -37,7 +37,6 @@ $_SESSION['finished'] = 1;
 if (isset($_POST['prac'])) {
     $pracValue = $_POST['prac'];
 
-    // Multiplicar "prac" por 30 y agregarlo a "puntuacionTotal"
     $_SESSION["puntuacionTotal"] += $pracValue * 30;
 } else {
     $pracValue = 'NULL';
@@ -46,18 +45,13 @@ if (isset($_POST['prac'])) {
 if (isset($_SESSION['startTime'])) {
     $startTime = $_SESSION['startTime'];
     $currentTime = time();
-
-    // Calcular el tiempo transcurrido desde el inicio
+    
     $elapsedTime = $currentTime - $startTime;
-
-    // Cada vez que pasen 30 segundos, sumar 5 a "totalTimeCounter"
-    if ($elapsedTime >= 30) {
+    if ($elapsedTime >= 100) {
         $_SESSION["totalTimeCounter"] += 15;
-        // Actualizar el tiempo de inicio
         $_SESSION['startTime'] = $currentTime;
     }
 } else {
-    // Inicializar el tiempo de inicio
     $_SESSION['startTime'] = time();
 }
 
@@ -87,14 +81,17 @@ if (isset($_POST['sendr'])) {
     <script>
         const sonido = cargarSonido("./sounds/winGame.mp3");
         sonido.play()
+
+        document.getElementById('returnForm').submit()
     </script>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $lang['titpag'] ?></title>
+        <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
         <link rel="stylesheet" href="style.css">
     </head>
-    <body onload=" audioHelpGame()">
+    <body onload=" audioHelpGame();">
         <div class="langs">
             <a  id="bt1" href="?lang=es"><img src="imgs/esp.png" alt="" srcset=""></a>
             <a  id="bt1" href="?lang=cat"><img src="imgs/cat.png" alt="" srcset=""></a>
@@ -104,7 +101,7 @@ if (isset($_POST['sendr'])) {
             <?php echo "<h1>" . $lang['loseTit'] . "</h1>"; ?>
             <?php echo "<h4>" . $lang['loseTit2'] . "</h4>"; ?>
         </div>
-        <div class="main">
+        <div class="mainFinal">
             <div class="stats">
                 <?php echo "<h2>" . $lang['statsTit'] . "</h2>"; ?>
                 <div class="circle"></div>

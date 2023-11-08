@@ -34,6 +34,8 @@ if(isset($_POST['destroyses'])){
     <title><?php echo $lang['titpag'] ?></title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
+    <script src="https://kit.fontawesome.com/8946387bf5.js" crossorigin="anonymous"></script>
+
 </head>
 <body">
     <div class="langs">
@@ -44,29 +46,36 @@ if(isset($_POST['destroyses'])){
     <?php
             echo "<h1 class='titPrincip'>".$lang['tit']."</h1>";
             ?>
-    <div class="main">
-        <div class="left">
-            <div class="instructions">
-                <?php
-                    echo "<h3>".$lang['ins']."</h3>";
-                    echo "<p>".$lang['ins1']."</p><br>";
-                    echo "<p>".$lang['ins2']."</p><br>";
-                    echo "<p>".$lang['ins3']."</p>";
-                ?>
+    <div class="mainMain">
+        <div class="main">
+            <div class="left">
+                <div class="instructions">
+                    <?php
+                        echo "<h3>".$lang['ins']."</h3>";
+                        echo "<p>".$lang['ins1']."</p><br>";
+                        echo "<p>".$lang['ins2']."</p><br>";
+                        echo "<p>".$lang['ins3']."</p><br>";
+                        echo "<h3>".$lang['com']."</h3>";
+                        echo "<p><i class='fa-regular fa-circle-question' id='comodinPublicoCSS'></i>&nbsp;&nbsp; >&nbsp;&nbsp;".$lang['com1']."</p><br>";
+                        echo "<p><i class='fa-solid fa-percent'></i>&nbsp;&nbsp; >&nbsp;&nbsp;".$lang['com2']."</p><br>";
+                        echo "<p><i class='fa-regular fa-hourglass-half' id='comodinTiempoCSS'></i>&nbsp;&nbsp; >&nbsp;&nbsp;".$lang['com3']."</p><br>";
+                    ?>
+                </div>
             </div>
-        </div>
-        <div class="right">
-                <img id="juanra" src="imgs/juanra.png" alt="" srcset="">
-            <div class="play">
-            <?php
-            echo "<h2>".$lang['start']."</h2>";
-            ?>
-            <a href="game.php" id="btnplayindjs" onclick="resetTime();establecerComodines();"><?php echo $lang['btn']?></a>
-            <p id="jsno"><?php echo $lang['js']?></p>
-            <?php echo "<a href='./hallfame.php' class='rankingMainR'>" . $lang['seeHallFame'] . "</a>"; ?>
+            <div class="right">
+                    <img id="juanra" src="imgs/juanra.png" alt="" srcset="">
+                <div class="play">
+                <?php
+                echo "<h2>".$lang['start']."</h2>";
+                ?>
+                <a href="game.php" id="btnplayindjs" onclick="resetTime();establecerComodines();"><?php echo $lang['btn']?></a>
+                <p id="jsno"><?php echo $lang['js']?></p>
+                <?php echo "<a href='./hallfame.php' class='rankingMainR'>" . $lang['seeHallFame'] . "</a>"; ?>
+                </div>
             </div>
         </div>
     </div>
+    
     <script src="./app.js"></script>
 
 </body>

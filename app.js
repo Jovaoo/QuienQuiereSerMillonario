@@ -98,20 +98,59 @@ function scrollToBottom(timedelay=0) {
         var diff = new Date(actual - inicio);
         var result = LeadingZero(diff.getUTCHours()) + ":" + LeadingZero(diff.getUTCMinutes()) + ":" + LeadingZero(diff.getUTCSeconds());
         document.getElementById("totalTime").value = result;
+        document.getElementById("totalTime2").value = result;
+
     }
 
-// Comodines 
 
+//
+// —————————————————————————— Comodines ———————————————————————————
+//
 var comodin1 = false;
+var comodin3 = 0;
 
 function establecerComodines() {
     localStorage.setItem("usedComodin1", 0)
     localStorage.setItem("usedComodin2", 0)
     localStorage.setItem("usedComodin3", 0)
+    localStorage.setItem("usedComodinCSS", 0)
 }
 
 function comodinTiempo() {
     comodin1 = true
+}
+
+function comodinPublico() {
+    comodin3 += 1;
+    document.getElementById('comodinPublicoCSS').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
+    localStorage.setItem("usedComodinCSS", 1)
+
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function animacionComodin3() {
+    if (localStorage.getItem("usedComodin3") == 0) {
+        localStorage.setItem("usedComodin3", 1);
+        const anim1 ="<div id='contenedor'><div class='contenedor-loader'><div class='loader1'></div><div class='loader2'></div><div class='loader3'></div><div class='loader4'></div></div><div class='cargando'>El público está votando...</div></div>"
+        document.getElementById("cP"+currentDiv).innerHTML = anim1;
+        const sonido = cargarSonido("./sounds/epicmusic.mp3");
+        sonido.play()
+        sleep(7000).then(() => { 
+            document.getElementById("contenedor").style = "display:none;" // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/
+                const anim11 ="<div class='circleMain'><div id='circlePublic'></div></div><div id='answersPublic'><h1>20% han votado x</h1><h1>60% han votado x</h1><h1>5% han votado x</h1><h1>15% han votado x</h1></div>";
+                document.getElementById("circlePublicMain"+currentDiv).innerHTML = anim11;
+                document.documentElement.style.setProperty('--color1', '#fab567');
+                document.documentElement.style.setProperty('--color2', '#f98cc1');
+                document.documentElement.style.setProperty('--color3', '#b2d5eb');
+                document.documentElement.style.setProperty('--color4', '#fcd793');
+                circlePublic = document.getElementById("circlePublic"); // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/ 
+                circlePublic.style.backgroundImage = `conic-gradient(var(--color1) 20%, var(--color2) 20% 80%, var(--color3) 80% 85%, var(--color4) 85% 100%)`;
+        });
+    }
+
 }
 
 //
@@ -126,36 +165,51 @@ function comodinTiempo() {
         if (localStorage.getItem("usedComodin1") == 1) {
             document.getElementById('comodinTiempoCSS').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
         }
+        if (localStorage.getItem("usedComodinCSS") == 1) {
+            document.getElementById('comodinPublicoCSS').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
+        }
         if(localStorage.getItem("rcValue") >= 3) {
             timerInterval = setInterval(function () {
-                countdown--;    
-                
-                if (comodin1 && localStorage.getItem("usedComodin1") == 0 ) {
-                    countdown = countdown + 30;
-                    usedComodin = true;
-                    localStorage.setItem("usedComodin1", 1);
-                    document.getElementById('comodinTiempoCSS').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
+                // deja 5 seg - cambiar despues con los segs que dura la animacion
+                if (comodin3 > 0 && comodin3 < 8) {
+                    comodin3 += 1;
                 } else {
-                    const minutes = Math.floor(countdown / 60);
-                    const seconds = countdown % 60;
-                    const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    
-                    if (countdown < 10) {
-                        if (colorFlag) {
-                            document.getElementById('cronoLimite' + currentDiv).style.color = "red";
-                        } else {
-                            document.getElementById('cronoLimite' + currentDiv).style.color = "white";
+                    countdown--;    
+
+                    if (comodin1 && localStorage.getItem("usedComodin1") == 0 ) {
+                        countdown = countdown + 30;
+                        usedComodin = true;
+                        localStorage.setItem("usedComodin1", 1);
+                        document.getElementById('comodinTiempoCSS').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
+                    } else {
+                        const minutes = Math.floor(countdown / 60);
+                        const seconds = countdown % 60;
+                        const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+                        if (countdown < 10) {
+                            if (colorFlag) {
+                                document.getElementById('cronoLimite' + currentDiv).style = "color:red;font-size:50px;";
+                            } else {
+                                document.getElementById('cronoLimite' + currentDiv).style.color = "white";
+                            }
+                            colorFlag = !colorFlag;
                         }
-                        colorFlag = !colorFlag;
-                    }
-    
-                    document.getElementById('cronoLimite'+currentDiv).textContent = formattedTime;
-    
-                    if (countdown === 0) {
-                        clearInterval(timerInterval);
-                        window.location.href = 'lose.php';
-                    }
+        
+                        document.getElementById('cronoLimite'+currentDiv).textContent = formattedTime;
+        
+                        if (countdown === 0) {
+                            saveTime();
+                            document.getElementById('pregac').value = localStorage.getItem("rcValue");
+                            clearTimeout(timeout);
+
+                            // Eliminamos el valor inicial guardado
+                            localStorage.removeItem("inicio");
+                            timeout=0;
+                            document.getElementById('returnForm').submit();
+                        }
+                    }   
                 }
+                
             }, 1000);
         } else {
             document.getElementById('cronoLimite1').style = "display:none";
@@ -195,7 +249,6 @@ function checkans(element,encodedQuf,encodedCr,n,cpc){
     }else{
         rc = ((cpc -1 ) * 3 ) + (num - 2)
     }
-
     if(qv === aa){
         document.getElementById('pregac').value= rc
         element.style.backgroundColor = 'green'
@@ -206,21 +259,19 @@ function checkans(element,encodedQuf,encodedCr,n,cpc){
         if(num <= 3){
         document.getElementById(div).style.display = "block"
         }
-        if(num == 4){
-            document.getElementsByClassName('next')[0].style.display = "block";
-        }
-        let parentDiv = element.closest('.quests' + n)
-        let buttons = parentDiv.getElementsByClassName('btnpr');
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].disabled = true;
-        }
-        
         localStorage.setItem("rcValue", rc+1); // Guarda las respuestas correctas
+
+        if(num == 4 && rc != 17){
+            document.getElementsByClassName('next')[0].style.display = "block";
+        } else if (rc === 17 ) {
+            saveTime();
+            document.getElementById('pregac2').value = localStorage.getItem("rcValue");
+            document.getElementsByClassName('winRed')[0].style.display = "block";
+        }   
+        
         scrollToBottom();
 
-        if(localStorage.getItem("rcValue") >= 3) {
-            showNextDiv();
-        }
+        showNextDiv();
 }
     else{
         saveTime()

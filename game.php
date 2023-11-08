@@ -81,8 +81,11 @@ function randq($al){
 function showq($numb,$qu,$rn){
     $numb += 1;
     $cr = [];
+    
     echo "<div id='quests".$numb."' class='quests".$numb." questsPrincip'>\n";
     echo "<h1 id='cronoLimite".$numb."'>00:30</h1>";
+    echo "<div id='cP".$numb."'></div>";
+    echo "<div id='circlePublicMain".$numb."'></div>";
     echo "<h3>".$qu[$rn][0]."</h3>\n";
 
 
@@ -198,7 +201,7 @@ empezarDetener();
         #quests2,#quests3{
             display:none;
         }
-        .return,.next{
+        .return,.next, .winRed{
             display:none;
         }
     </style>
@@ -214,12 +217,11 @@ empezarDetener();
                 <h2 id='crono'>00:00</h2 > 
             </div>
             <div class="static25">
-                <i class="fa-regular fa-circle-question"></i>
-                <i class="fa-solid fa-percent"></i>  
+                <i class="fa-regular fa-circle-question" onclick="comodinPublico();animacionComodin3()" id="comodinPublicoCSS"></i>
+                <i class="fa-solid fa-percent" ></i>  
                 <i class="fa-regular fa-hourglass-half" onclick="comodinTiempo()" id="comodinTiempoCSS"></i>
             </div>
-    </div>
-
+    </div>  
 
     <?php
     $numq = randq($arlong);
@@ -230,13 +232,21 @@ empezarDetener();
         if ($contadorDivs <= 3) {
             showq($i, $defq, $numq[$i]);
         }
-    }   
+    }
+
+    
     ?>  
+
     
     <div class= "quests">
-    <form action="lose.php" method="post" class="return" >
+    <form action="lose.php" method="post" class="return" id="returnForm" >
             <input type="hidden" name="prac" id = "pregac" value="">
             <input type="hidden" name="totalTime" id = "totalTime" value="">
+            <input type="submit" value="<?php echo $lang['next'] ?>" class="submitt">
+        </form>
+        <form action="win.php" method="post" class="winRed" id="winForm" >
+            <input type="hidden" name="prac" id = "pregac2" value="">
+            <input type="hidden" name="totalTime" id = "totalTime2" value="">
             <input type="submit" value="<?php echo $lang['next'] ?>" class="submitt">
         </form>
         <form action="game.php" class="next" method="POST">
