@@ -19,9 +19,6 @@ if(isset($_POST['destroyses'])){
     unset($_SESSION["totalTimeCounter"]);
     unset($_SESSION["puntuacionTotal"]);
     unset($_SESSION["ptTotal"]);
-
-
-
 }
 
 

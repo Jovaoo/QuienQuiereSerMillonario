@@ -142,6 +142,7 @@ function animacionComodin3() {
             document.getElementById("contenedor").style = "display:none;" // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/
                 const anim11 ="<div class='circleMain'><div id='circlePublic'></div></div><div id='answersPublic'><h1>20% han votado x</h1><h1>60% han votado x</h1><h1>5% han votado x</h1><h1>15% han votado x</h1></div>";
                 document.getElementById("circlePublicMain"+currentDiv).innerHTML = anim11;
+                document.getElementById("circlePublicMain"+currentDiv).style.display = "flex";
                 document.documentElement.style.setProperty('--color1', '#fab567');
                 document.documentElement.style.setProperty('--color2', '#f98cc1');
                 document.documentElement.style.setProperty('--color3', '#b2d5eb');

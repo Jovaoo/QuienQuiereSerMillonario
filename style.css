@@ -689,10 +689,14 @@ tbody {
   }
 
 #circlePublicMain1, #circlePublicMain2, #circlePublicMain3 {
-    display: flex;
-    width: 100%;
+    display: none;
     justify-content: center;
     margin-bottom: 25px;
+    background-color: var(--verdeClaro);
+    border-radius: 25px;
+    box-shadow:  20px 20px 60px #143d3d,
+    -20px -20px 60px #1c5353;
+    padding: 25px;
 }
 
 .circleMain {
