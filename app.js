@@ -124,6 +124,8 @@ function comodinTiempo() {
     comodin1 = true
 }
 function obtenerValores(sa) {
+    document.getElementById('comodin50css').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
+    localStorage.setItem("usedComodin2", 1)
     var arraySas = JSON.parse(sa);
     var decodedData = [];
     arraySas.forEach(function (element) {
@@ -223,7 +225,7 @@ function animacionComodin3(sa) {
 
                 });
             }
-            const randomNumber = 2
+            const randomNumber = Math.floor(Math.random() * 5) + 1;
             if (randomNumber === 5) {
                 if(resps.length == 2){
                     let cor
@@ -344,6 +346,10 @@ function animacionComodin3(sa) {
         }
         if (localStorage.getItem("usedComodinCSS") == 1) {
             document.getElementById('comodinPublicoCSS').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
+        }
+        if(localStorage.getItem("usedComodin2") == 1){
+            document.getElementById('comodin50css').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
+
         }
         if(localStorage.getItem("rcValue") >= 3) {
             timerInterval = setInterval(function () {

@@ -251,7 +251,7 @@ $trimmed_json_sas = trim($json_sas);
             </div>
             <div class="static25">
                 <i class="fa-regular fa-circle-question" onclick="comodinPublico();animacionComodin3('<?php echo htmlspecialchars($trimmed_json_sas); ?>')" id="comodinPublicoCSS"></i>
-                <i class="fa-solid fa-percent" onclick="obtenerValores('<?php echo htmlspecialchars($trimmed_json_sas); ?>')" ></i>  
+                <i class="fa-solid fa-percent" onclick="obtenerValores('<?php echo htmlspecialchars($trimmed_json_sas); ?>')" id="comodin50css" ></i>  
                 <i class="fa-regular fa-hourglass-half" onclick="comodinTiempo()" id="comodinTiempoCSS"></i>
             </div>
     </div>  
