@@ -101,8 +101,8 @@ function showq($numb,$qu,$rn){
         $quf = trim($qu[$rn][$i]);
         $quf = substr($quf, 1);
     
-        $encodedQuf = base64_encode($quf);
-        $encodedCr = base64_encode($cr[0]);
+        $encodedQuf = base64_encode(utf8_decode($quf));
+        $encodedCr = base64_encode(utf8_decode($cr[0]));
         $encodedNumb = base64_encode($numb);
         $encodedDiff = base64_encode($_SESSION['diff']);
     
@@ -209,7 +209,26 @@ empezarDetener();
 </head>
 
 
-<body onload="empezarDetener();startCountdown();">
+<body onload="empezarDetener();startCountdown();ponclas();">
+<?php
+function corrans($qu,$arl){
+    $cr = [];
+    for ($j=0; $j < $arl; $j++ ){
+        for ($i=1; $i < 5 ; $i++) { 
+            $quf = trim($qu[$j][$i]);
+        if (str_starts_with($quf,"+")){
+            $quf = substr($quf,1);
+            $encodequf = base64_encode(utf8_decode($quf));
+            array_push($cr,$encodequf);
+        }
+    }
+}
+return $cr;
+}
+$av = corrans($defq,$arlong);
+$json_sas = json_encode($av);
+$trimmed_json_sas = trim($json_sas);
+?>
     <div class="cronoStatic">
             <div class="static25">
             </div>
@@ -217,8 +236,8 @@ empezarDetener();
                 <h2 id='crono'>00:00</h2 > 
             </div>
             <div class="static25">
-                <i class="fa-regular fa-circle-question" onclick="comodinPublico();animacionComodin3()" id="comodinPublicoCSS"></i>
-                <i class="fa-solid fa-percent" ></i>  
+                <i class="fa-regular fa-circle-question" onclick="comodinPublico();animacionComodin3('<?php echo htmlspecialchars($trimmed_json_sas); ?>')" id="comodinPublicoCSS"></i>
+                <i class="fa-solid fa-percent" onclick="obtenerValores('<?php echo htmlspecialchars($trimmed_json_sas); ?>')" ></i>  
                 <i class="fa-regular fa-hourglass-half" onclick="comodinTiempo()" id="comodinTiempoCSS"></i>
             </div>
     </div>  

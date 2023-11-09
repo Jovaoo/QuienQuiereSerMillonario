@@ -108,6 +108,10 @@ function scrollToBottom(timedelay=0) {
 //
 var comodin1 = false;
 var comodin3 = 0;
+function ponclas(){
+    var divElement = document.querySelector('.quests1');
+    divElement.classList.add('vis');
+}
 
 function establecerComodines() {
     localStorage.setItem("usedComodin1", 0)
@@ -119,7 +123,49 @@ function establecerComodines() {
 function comodinTiempo() {
     comodin1 = true
 }
+function obtenerValores(sa) {
+    var arraySas = JSON.parse(sa);
+    var decodedData = [];
+    arraySas.forEach(function (element) {
+        decodedData.push(atob(element));
+    });
+    const divs = document.querySelectorAll('.vis');
+    let lastVisibleDivInputs;
+    var resps = []
+    if (divs.length > 0) {
+        const lastDiv = divs[divs.length - 1];
+        lastVisibleDivInputs = lastDiv.querySelectorAll('input:not([disabled])');
+        lastVisibleDivInputs.forEach((input) => {
+            resps.push(input.value)
 
+        });
+    }
+    var respsdis = []
+    console.log(resps)
+    do {
+        var numran = Math.floor(Math.random() * resps.length)
+        if(respsdis.length === 0){
+            if(!decodedData.includes(resps[numran])){
+                respsdis.push(resps[numran])
+            }
+        }else{
+            if(!respsdis.includes(resps[numran])){
+                if(!decodedData.includes(resps[numran])){
+                    respsdis.push(resps[numran])
+                }            }
+        }
+    } while (respsdis.length != 2);
+    console.log(respsdis)
+    respsdis.forEach(element => {
+        var inpval = document.querySelectorAll('input:not([disabled])');
+        inpval.forEach(element2 => {
+            if(element == element2.value){
+                element2.disabled = true;
+            }
+        });
+    });
+    console.log(decodedData);
+}
 function comodinPublico() {
     comodin3 += 1;
     document.getElementById('comodinPublicoCSS').style = "color:#6b6b6b; background:rgba(0,0,0,0.2);cursor:not-allowed;";
@@ -130,25 +176,155 @@ function comodinPublico() {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-function animacionComodin3() {
+function randompie(qp){
+    let nummil = [] 
+    if(qp == 2){
+        let num1, num2
+        do {
+            num1 = Math.floor(Math.random() * 41) + 60; // Número entre 60 y 100
+            num2 = 100 - (num1);
+            nummil.push(num1,num2) 
+        } while (num2 <= 0);
+        return nummil
+    }else{
+        let num1, num2, num3, num4;
+        do {
+            num1 = Math.floor(Math.random() * 41) + 60; // Número entre 60 y 100
+            num2 = Math.floor(Math.random() * (101 - num1));
+            num3 = Math.floor(Math.random() * (101 - num1 - num2));
+            num4 = 100 - (num1 + num2 + num3);
+            nummil.push(num1,num2,num3,num4) 
+        } while (num4 <= 0);
+        return nummil
+    }
+}
+function animacionComodin3(sa) {
+    60
     if (localStorage.getItem("usedComodin3") == 0) {
+        var arraySas = JSON.parse(sa);
+        var decodedData = [];
+        arraySas.forEach(function (element) {
+            decodedData.push(atob(element));
+        });
         localStorage.setItem("usedComodin3", 1);
         const anim1 ="<div id='contenedor'><div class='contenedor-loader'><div class='loader1'></div><div class='loader2'></div><div class='loader3'></div><div class='loader4'></div></div><div class='cargando'>El público está votando...</div></div>"
         document.getElementById("cP"+currentDiv).innerHTML = anim1;
         const sonido = cargarSonido("./sounds/epicmusic.mp3");
         sonido.play()
-        sleep(7000).then(() => { 
-            document.getElementById("contenedor").style = "display:none;" // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/
-                const anim11 ="<div class='circleMain'><div id='circlePublic'></div></div><div id='answersPublic'><h1>20% han votado x</h1><h1>60% han votado x</h1><h1>5% han votado x</h1><h1>15% han votado x</h1></div>";
-                document.getElementById("circlePublicMain"+currentDiv).innerHTML = anim11;
-                document.getElementById("circlePublicMain"+currentDiv).style.display = "flex";
-                document.documentElement.style.setProperty('--color1', '#fab567');
-                document.documentElement.style.setProperty('--color2', '#f98cc1');
-                document.documentElement.style.setProperty('--color3', '#b2d5eb');
-                document.documentElement.style.setProperty('--color4', '#fcd793');
-                circlePublic = document.getElementById("circlePublic"); // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/ 
-                circlePublic.style.backgroundImage = `conic-gradient(var(--color1) 20%, var(--color2) 20% 80%, var(--color3) 80% 85%, var(--color4) 85% 100%)`;
+        sleep(7000).then(() => {
+            const divs = document.querySelectorAll('.vis');
+            let lastVisibleDivInputs;
+            var resps = []
+            if (divs.length > 0) {
+                const lastDiv = divs[divs.length - 1];
+                lastVisibleDivInputs = lastDiv.querySelectorAll('input:not([disabled])');
+                lastVisibleDivInputs.forEach((input) => {
+                    resps.push(input.value)
+
+                });
+            }
+            const randomNumber = 2
+            if (randomNumber === 5) {
+                if(resps.length == 2){
+                    let cor
+                    let arrin = []
+                    numpor = randompie(resps.length);
+                    console.log(decodedData)
+                    resps.forEach(element => {
+                        if(decodedData.includes(element)){
+                            cor = element;
+                        }else{
+                            arrin.push(element)
+                        }
+                    });
+                    console.log(resps)
+                    document.getElementById("contenedor").style = "display:none;" // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/
+                    const anim11 =`<div class='circleMain'><div id='circlePublic'></div></div><div id='answersPublic'><h1>${numpor[0]}% ${arrin[0]}</h1><h1>${numpor[1]}%${cor}</h1></div>`;
+                    document.getElementById("circlePublicMain"+currentDiv).innerHTML = anim11;
+                    document.getElementById("circlePublicMain"+currentDiv).style.display = "flex";
+                    document.documentElement.style.setProperty('--color1', '#fab567');
+                    document.documentElement.style.setProperty('--color2', '#f98cc1');
+                    document.documentElement.style.setProperty('--color3', '#b2d5eb');
+                    document.documentElement.style.setProperty('--color4', '#fcd793');
+                    circlePublic = document.getElementById("circlePublic"); // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/ 
+                    circlePublic.style.backgroundImage = `conic-gradient(var(--color1) ${numpor[1]}%, var(--color2) ${numpor[1]}% 100%)`;
+
+                }else{
+                    let cor
+                    let arrin = []
+                    numpor = randompie(resps.length);
+                    console.log(decodedData)
+                    resps.forEach(element => {
+                        if(decodedData.includes(element)){
+                            cor = element;
+                        }else{
+                            arrin.push(element)
+                        }
+                    });
+                    console.log(resps)
+                    document.getElementById("contenedor").style = "display:none;" // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/
+                    const anim11 =`<div class='circleMain'><div id='circlePublic'></div></div><div id='answersPublic'><h1>${numpor[0]}% ${arrin[0]}</h1><h1>${numpor[1]}% ${arrin[1]}</h1><h1>${numpor[2]}% ${arrin[2]}</h1><h1>${numpor[3]}%${cor}</h1></div>`;
+                    document.getElementById("circlePublicMain"+currentDiv).innerHTML = anim11;
+                    document.getElementById("circlePublicMain"+currentDiv).style.display = "flex";
+                    document.documentElement.style.setProperty('--color1', '#fab567');
+                    document.documentElement.style.setProperty('--color2', '#f98cc1');
+                    document.documentElement.style.setProperty('--color3', '#b2d5eb');
+                    document.documentElement.style.setProperty('--color4', '#fcd793');
+                    circlePublic = document.getElementById("circlePublic"); // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/ 
+                    circlePublic.style.backgroundImage = `conic-gradient(var(--color1) ${numpor[0]}%, var(--color2) ${numpor[0]}% ${ numpor[0] + numpor[1]}%, var(--color3) ${ numpor[0] + numpor[1]}% ${numpor[0] +  numpor[1] + numpor[2]}%, var(--color4) ${numpor[0] +  numpor[1] + numpor[2]}% 100%)`;
+                }
+            } else {
+                if(resps.length == 2){
+                    let cor
+                    let arrin = []
+                    numpor = randompie(resps.length);
+                    console.log(decodedData)
+                    resps.forEach(element => {
+                        if(decodedData.includes(element)){
+                            cor = element;
+                            console.log(cor)
+                        }else{
+                            arrin.push(element)
+                        }
+                    });
+                    console.log(resps)
+                    document.getElementById("contenedor").style = "display:none;" // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/
+                    const anim11 =`<div class='circleMain'><div id='circlePublic'></div></div><div id='answersPublic'><h1>${numpor[0]}%${cor}</h1><h1>${numpor[1]}% ${arrin[0]}</h1></div>`;
+                    document.getElementById("circlePublicMain"+currentDiv).innerHTML = anim11;
+                    document.getElementById("circlePublicMain"+currentDiv).style.display = "flex";
+                    document.documentElement.style.setProperty('--color1', '#fab567');
+                    document.documentElement.style.setProperty('--color2', '#f98cc1');
+                    document.documentElement.style.setProperty('--color3', '#b2d5eb');
+                    document.documentElement.style.setProperty('--color4', '#fcd793');
+                    circlePublic = document.getElementById("circlePublic"); // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/ 
+                    circlePublic.style.backgroundImage = `conic-gradient(var(--color1) ${numpor[1]}%, var(--color2) ${numpor[1]}% 100%)`;
+
+                }else{
+                    let cor
+                    let arrin = []
+                    numpor = randompie(resps.length);
+                    console.log(decodedData)
+                    resps.forEach(element => {
+                        if(decodedData.includes(element)){
+                            cor = element;
+                        }else{
+                            arrin.push(element)
+                        }
+                    });
+                    console.log(resps)
+                    document.getElementById("contenedor").style = "display:none;" // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/
+                    const anim11 =`<div class='circleMain'><div id='circlePublic'></div></div><div id='answersPublic'><h1>${numpor[0]}%${cor}</h1><h1>${numpor[1]}% ${arrin[0]}</h1><h1>${numpor[2]}% ${arrin[1]}</h1><h1>${numpor[3]}% ${arrin[2]}</h1></div>`;
+                    document.getElementById("circlePublicMain"+currentDiv).innerHTML = anim11;
+                    document.getElementById("circlePublicMain"+currentDiv).style.display = "flex";
+                    document.documentElement.style.setProperty('--color1', '#fab567');
+                    document.documentElement.style.setProperty('--color2', '#f98cc1');
+                    document.documentElement.style.setProperty('--color3', '#b2d5eb');
+                    document.documentElement.style.setProperty('--color4', '#fcd793');
+                    circlePublic = document.getElementById("circlePublic"); // ESTOS PORCENTAJES SON LOS QUE HABRA QUE CAMBIAR POR LA VARIABLE  \/ 
+                    circlePublic.style.backgroundImage = `conic-gradient(var(--color1) ${numpor[0]}%, var(--color2) ${numpor[0]}% ${ numpor[0] + numpor[1]}%, var(--color3) ${ numpor[0] + numpor[1]}% ${numpor[0] +  numpor[1] + numpor[2]}%, var(--color4) ${numpor[0] +  numpor[1] + numpor[2]}% 100%)`;
+                }            }
+            console.log(resps)
+
         });
     }
 
@@ -259,6 +435,7 @@ function checkans(element,encodedQuf,encodedCr,n,cpc){
         let div = "quests" + (num)
         if(num <= 3){
         document.getElementById(div).style.display = "block"
+        document.getElementById(div).classList.add('vis');
         }
         localStorage.setItem("rcValue", rc+1); // Guarda las respuestas correctas
 
