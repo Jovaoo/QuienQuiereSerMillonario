@@ -83,14 +83,28 @@ function showq($numb,$qu,$rn){
     $cr = [];
     
     echo "<div id='quests".$numb."' class='quests".$numb." questsPrincip'>\n";
+
     echo "<h1 id='cronoLimite".$numb."'>00:30</h1>";
     echo "<div id='cP".$numb."'></div>";
     echo "<div id='circlePublicMain".$numb."'></div>";
+    $dif = $_SESSION['diff'];
+    echo "<div class='divfot'>";
+    if (file_exists("FotosPreguntas/$dif/$rn.jpg")) {
+        echo "<img src='FotosPreguntas/$dif/$rn.jpg' class='fotopre'>";
+    }
+    if (file_exists("FotosPreguntas/$dif/$rn.PNG")) {
+        echo "<img src='FotosPreguntas/$dif/$rn.PNG'class='fotopre' >";
+    }
+    if (file_exists("FotosPreguntas/$dif/$rn.webp")) {
+        echo "<img src='FotosPreguntas/$dif/$rn.webp'class='fotopre'>";
+    }
+    echo "</div>";
     echo "<h3>".$qu[$rn][0]."</h3>\n";
-
+    $foto = $qu[$rn][0];
 
     for ($i=1; $i < 5 ; $i++) { 
         $quf = trim($qu[$rn][$i]);
+
         if (str_starts_with($quf,"+")){
             $quf = substr($quf,1);
             array_push($cr,$quf);

@@ -257,7 +257,13 @@ a img{
     cursor: pointer;
 
 }
+.divfot{
+    text-align: center;
 
+}
+.fotopre{
+    height: 20vh;
+}
 .quests {
     display: flex;
     flex-direction: column;
